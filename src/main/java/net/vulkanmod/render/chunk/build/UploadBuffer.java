@@ -35,13 +35,9 @@ public class UploadBuffer {
     public ByteBuffer getIndexBuffer() { return indexBuffer; }
 
     public void release() {
-        // If we're not using a pooled buffer, free the memory
-        if (vertexBuffer != null && !vertexBuffer.isDirect()) {
-            MemoryUtil.memFree(vertexBuffer);
-        }
-        if (indexBuffer != null && !indexBuffer.isDirect()) {
-            MemoryUtil.memFree(indexBuffer);
-        }
+        // Free the memory for both buffers
+        MemoryUtil.memFree(vertexBuffer);
+        MemoryUtil.memFree(indexBuffer);
         this.released = true;
     }
 }
